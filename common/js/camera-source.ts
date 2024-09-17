@@ -15,9 +15,9 @@ class CameraSource {
     this.sink_ = new VideoSink();
   }
 
-  init() : Promise<void> {
+  init(): Promise<void> {
     return new Promise<void>((resolve, reject) => {
-      navigator.mediaDevices.getUserMedia({audio: false, video: true}).then( stream => {
+      navigator.mediaDevices.getUserMedia({ audio: false, video: true }).then(stream => {
         this.stream_ = stream
         this.videoTrack_ = this.stream_.getVideoTracks()[0]
         this.videoMirrorHelper_.setStream(this.stream_);
@@ -31,32 +31,34 @@ class CameraSource {
   setMediaProcessorConnector(mediaProcessorConnector: MediaProcessorConnectorInterface): Promise<void> {
     return new Promise<void>(async (resolve, reject) => {
       this.mediaProcessorConnector_ = mediaProcessorConnector;
-      if (!this.stream_) 
-      {
+      if (!this.stream_) {
         console.log('[CameraSource] Requesting camera.');
         reject("no stream")
       }
-      this.mediaProcessorConnector_.setTrack(this.videoTrack_!).then( newTrack => {
+      this.mediaProcessorConnector_.setTrack(this.videoTrack_!).then(newTrack => {
         let processedStream = new MediaStream();
         processedStream.addTrack(newTrack);
         this.sink_.setMediaStream(processedStream);
         resolve();
       })
-      .catch(e => {
-        reject(e)
-      })
+        .catch(e => {
+          reject(e)
+        })
     });
   }
 
   async stopMediaProcessorConnector() {
-    if(this.mediaProcessorConnector_){
+    if (this.mediaProcessorConnector_) {
       this.mediaProcessorConnector_.destroy().then(() => {
         this.sink_.destroy()
       })
-      .catch(e => {
-        console.log(e);
-      });      
+        .catch(e => {
+          console.log(e);
+        });
     }
+  }
+  getStream(): MediaStream | undefined {
+    return this.stream_;
   }
 }
 
