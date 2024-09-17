@@ -4,12 +4,14 @@ This sample application applies some background visual effects by using the [@vo
 You can see a live demo of this sample running [here](https://vonage-background-enchantments-sample.s3.amazonaws.com/index.html)
 # Building the application
 1. Configure the environment
-    npm i
+```
+npm I
+```
 2. Add your session credentials on `js/config.js`
 3. Run dev version
-
-    npm run dev
-
+```
+npm run dev
+```
 ## Run production version
 
     npm run build
