@@ -10,6 +10,7 @@ import {
   WebglSelfieSegmentationType,
 } from "@vonage/ml-transformers";
 import { setVonageMetadata } from "@vonage/media-processor";
+import { initializeSession } from './opentok';
 
 const MEDIA_ASSETS_URI: string =
   "https://vonage-background-enchantments-sample.s3.amazonaws.com/";
@@ -174,6 +175,8 @@ async function main() {
       )
       ?.focus();
   });
+
+  document.getElementById("publishBtn")?.addEventListener("click", () => initializeSession(source, processor));
 
   await init();
 }

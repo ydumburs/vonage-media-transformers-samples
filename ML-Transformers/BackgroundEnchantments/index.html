@@ -1,50 +1,7 @@
 <html>
 
 <head>
-  <style>
-    body {
-      margin: 0px;
-    }
-
-    .headline {
-      text-align: center;
-    }
-
-    vwc-top-app-bar img {
-      margin-left: 16px
-    }
-
-    .maincard {
-      margin: 10 auto;
-      width: 58%;
-      max-width: 1120px;
-      height: fit-content;
-      display: block;
-    }
-
-    .maincardlayout {
-      display: grid;
-      grid-template-columns: 4fr 6fr;
-    }
-
-    .video-wrapper {
-      aspect-ratio: 1.1;
-      background-image: url(images/vonage.png);
-      background-repeat: no-repeat;
-      background-position: center;
-      background-color: var(--vvd-color-canvas);
-      background-size: 100% auto;
-      border-radius: 4px;
-      overflow: hidden;
-      border: 1px solid var(--vvd-color-neutral-30);
-    }
-
-    .video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-  </style>
+  <link href="css/app.css" rel="stylesheet" type="text/css">
 
   <script type="module">
     import "@vonage/vwc-top-app-bar";
@@ -67,13 +24,19 @@
     <img slot="navigationIcon" height="24"
       src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQI9k8NKq3KoOs1VkwSYwPwwQbisiS_K-0jtBUyml13k7EBy8Aekz7G7I1vqceWf5kEQ&usqp=CAU" />
     <div>
-      <vwc-banner open connotation="info" message="Vonage Background Effects (out of the box solution) sample"></vwc-banner>
+      <vwc-banner open connotation="info"
+        message="Vonage Background Effects (out of the box solution) sample"></vwc-banner>
       <vwc-layout gutters="xs" column-basis="block">
-        <vwc-text font-face="subtitle-1" class="headline" tight>This sample application shows how to use Vonage Background Effects solution.</vwc-text>
+        <vwc-text font-face="subtitle-1" class="headline" tight>This sample application shows how to use Vonage
+          Background Effects solution.</vwc-text>
       </vwc-layout>
 
       <vwc-card class="maincard" elevation="0">
         <div slot="main" gutters="xs" class="maincardlayout">
+          <span class="tooltiptext" font-face="subtitle-3">How to use:<br>
+            1. Choose [Type]<br>
+            2. Click on [Show Preview]<br>
+            3. Select the [Publish] button to publish the stream with your selected filter</span>
           <vwc-layout column-basis="block" gutters="xs">
             <vwc-text font-face="subtitle-2" class="headline" tight>Source</vwc-text>
             <div class="video-wrapper">
@@ -92,6 +55,9 @@
                 </vwc-list-item>
                 <vwc-list-item value="blurHigh">
                   Blur High
+                </vwc-list-item>
+                <vwc-list-item value="blurVeryHigh">
+                  Blur Very High
                 </vwc-list-item>
                 <vwc-list-item value="virtual">
                   Virtual
@@ -130,13 +96,26 @@
                 id="githubButton"></vwc-button>
               <vwc-button connotation="cta" label="Use Vivid" layout="filled" icon="open-line" trailingIcon
                 id="vividButton"></vwc-button>
+              <vwc-button connotation="cta" label="PUBLISH" layout="filled" icon="" trailingIcon
+                id="publishBtn"></vwc-button>
             </vwc-layout>
           </vwc-layout>
         </div>
       </vwc-card>
-      <vwc-snackbar timeoutms="5000" icon="megaphone-solid" message="Please select a processing type"
-        dismissible="true" position="BOTTOM-CENTER" connotation="info" id="disabledHover"></vwc-snackbar>
+      <div class="publisher-container">
+        <div class="publisher-box">
+          <div class="publisher-header">Publisher</div>
+          <div id="publisher"></div>
+        </div>
+        <div class="subscriber-box">
+          <div class="subscriber-header">Subscriber</div>
+          <div id="subscriber"></div>
+        </div>
+      </div>
+      <vwc-snackbar timeoutms="5000" icon="megaphone-solid" message="Please select a processing type" dismissible="true"
+        position="BOTTOM-CENTER" connotation="info" id="disabledHover"></vwc-snackbar>
     </div>
+
   </vwc-top-app-bar>
   <script type="module" src="./main.ts"></script>
 </body>

@@ -6,6 +6,7 @@ module.exports = defineConfig({
   publicDir: path.join(__dirname, "public"),
   build: {
     outDir: path.join(__dirname, "dist"),
-    emptyOutDir: true
+    emptyOutDir: true,
+    target: 'es2020'
   }
 })
